@@ -1,0 +1,11 @@
+$primary: #B86BFF;
+
+@import "~bulma/sass/utilities/all";
+
+// Typography
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+$family-sans-serif: "B612", sans-serif;
+$family-primary: $family-sans-serif;
+
+// Images
+$dimensions: 62 128 !default;

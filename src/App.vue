@@ -1,28 +1,58 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <NavBar/>
+    <main class="content-main">
+      <ImageRoll :images="images"/>
+      <DropArea
+        :images="images"
+        @loaded="addImage"
+        @remove="removeImage"/>
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import DropArea from "@/components/DropArea";
+import ImageRoll from "@/components/ImageRoll";
+import NavBar from "@/components/NavBar";
 
 export default {
-  name: 'App',
+  name: "App",
+
   components: {
-    HelloWorld
+    DropArea,
+    ImageRoll,
+    NavBar
+  },
+
+  data() {
+    return {
+      images: []
+    };
+  },
+
+  methods: {
+    addImage(image) {
+      this.images.push(image);
+    },
+
+    removeImage(index) {
+      this.images.splice(index, 1);
+    }
   }
-}
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: calc(100vh - 3.25em);
+}
+
+.content-main {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  height: 100%;
+  justify-content: center;
 }
 </style>
