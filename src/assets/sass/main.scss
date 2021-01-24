@@ -3,6 +3,7 @@
 
 
 // Bootsrap
-@import '~bulma/bulma';
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
+@import "~bulma/sass/base/_all";
+@import "~bulma/sass/elements/button";
+@import "~bulma/sass/elements/image";
+@import "~bulma/sass/components/navbar";

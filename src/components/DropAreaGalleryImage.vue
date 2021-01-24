@@ -3,25 +3,33 @@
     <div
       class="overlay"
       @click="close">
-      <span class="icon is-medium">
-        <i class="fas fa-times fa-2x"/>
-      </span>
+      <font-awesome-icon
+        :icon="icon"
+        size="2x"/>
     </div>
   </VImage>
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import VImage from "@/components/utililty/VImage";
 
 export default {
   name: "DropAreaGalleryImage",
 
-  components: { VImage },
+  components: { FontAwesomeIcon, VImage },
 
   props: {
     image: {
       type: String,
       required: true
+    }
+  },
+
+  computed: {
+    icon() {
+      return faTimes;
     }
   },
 
@@ -46,7 +54,7 @@ export default {
   &:hover .overlay {
     opacity: 1;
 
-    .icon {
+    .fa-times {
       transform: rotate(0);
     }
   }
@@ -67,7 +75,7 @@ export default {
     top: 0;
     width: 100%;
 
-    .icon {
+    .fa-times {
       transition: 0.5s ease;
       transform: rotate(-90deg);
     }

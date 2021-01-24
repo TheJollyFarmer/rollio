@@ -4,7 +4,9 @@
     @click="closeEvent">
     <div class="box">
       <span class="icon is-medium">
-        <i class="fas fa-bomb fa-2x"/>
+        <font-awesome-icon
+          :icon="icon"
+          size="2x"/>
       </span>
       <slot/>
     </div>
@@ -12,8 +14,13 @@
 </template>
 
 <script>
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+import { faBomb } from "@fortawesome/free-solid-svg-icons";
+
 export default {
   name: "VAlert",
+
+  components: { FontAwesomeIcon },
 
   props: {
     active: {
@@ -26,6 +33,10 @@ export default {
   computed: {
     isActive() {
       return this.active ? "is-active" : "";
+    },
+
+    icon() {
+      return faBomb;
     }
   },
 
