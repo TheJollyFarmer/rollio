@@ -1,5 +1,7 @@
 # dice
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/ec7c9e19-60cc-478c-af9f-c180844d7a16/deploy-status)](https://app.netlify.com/sites/rollio/deploys)
+
 ## Project setup
 ```
 yarn install
