@@ -5,12 +5,12 @@
       dimension="128"/>
     <button
       class="button is-primary"
-      @click="randomiseImage">
+      @click.stop="randomiseImage">
       Roll
     </button>
     <VAlert
       :active="alert"
-      @close="toggleAlert">
+      @close="alert = false">
       {{ alertText }}
     </VAlert>
   </VSection>
@@ -67,7 +67,7 @@ export default {
 
   methods: {
     randomiseImage() {
-      this.count > 1 ? this.randomiseNumber() : this.toggleAlert();
+      this.count > 1 ? this.randomiseNumber() : (this.alert = true);
     },
 
     randomiseNumber() {
@@ -79,7 +79,7 @@ export default {
 
         let number = self.generateNumber();
 
-        if (step === self.count * 10) clearInterval(interval);
+        if (step === 60) clearInterval(interval);
 
         self.number = number;
       }, 75);
@@ -87,10 +87,6 @@ export default {
 
     generateNumber() {
       return Math.floor(Math.random() * this.count) + 1;
-    },
-
-    toggleAlert() {
-      this.alert = !this.alert;
     }
   }
 };
@@ -104,6 +100,7 @@ export default {
   justify-content: center;
 
   .button {
+    box-shadow: $shadow;
     margin-top: 1em;
     transition: 0.2s ease-out;
     width: 128px;

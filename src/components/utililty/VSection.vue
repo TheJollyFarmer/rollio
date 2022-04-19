@@ -13,7 +13,7 @@ export default {
 <style lang="scss" scoped>
 section {
   border-top: 5px solid $primary;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: $shadow;
   height: 52.5%;
   margin: 0 auto;
   width: calc(100% - 4em);

@@ -14,7 +14,7 @@
     </div>
     <VAlert
       :active="alert"
-      @close="toggleAlert">
+      @close="alert = false">
       You can only add a maximum of 40 images!
     </VAlert>
   </VSection>
@@ -69,11 +69,7 @@ export default {
     onDrop(e) {
       let files = e.dataTransfer.files;
 
-      this.maxImages ? this.toggleAlert() : this.handleImages(files);
-    },
-
-    toggleAlert() {
-      this.alert = !this.alert;
+      this.maxImages ? (this.alert = true) : this.handleImages(files);
     },
 
     handleImages(files) {

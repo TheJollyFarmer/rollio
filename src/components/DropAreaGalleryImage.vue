@@ -3,7 +3,7 @@
     <div
       class="overlay"
       @click="close">
-      <font-awesome-icon
+      <FontAwesomeIcon
         :icon="icon"
         size="2x"/>
     </div>

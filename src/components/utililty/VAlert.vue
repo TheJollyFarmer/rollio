@@ -1,26 +1,25 @@
 <template>
-  <div
-    :class="['modal', isActive]"
-    @click="closeEvent">
+  <TransitionFade v-if="active">
     <div class="box">
       <span class="icon is-medium">
-        <font-awesome-icon
+        <FontAwesomeIcon
           :icon="icon"
           size="2x"/>
       </span>
       <slot/>
     </div>
-  </div>
+  </transitionfade>
 </template>
 
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faBomb } from "@fortawesome/free-solid-svg-icons";
+import TransitionFade from "@/components/TransitionFade";
 
 export default {
   name: "VAlert",
 
-  components: { FontAwesomeIcon },
+  components: { TransitionFade, FontAwesomeIcon },
 
   props: {
     active: {
@@ -40,51 +39,63 @@ export default {
     }
   },
 
+  mounted() {
+    document.addEventListener("click", this.closeEvent);
+  },
+
+  beforeDestroy() {
+    document.removeEventListener("click", this.closeEvent);
+  },
+
   methods: {
-    closeEvent() {
-      this.$emit("close");
+    closeEvent(event) {
+      if (!this.$el.contains(event.target)) {
+        this.$emit("close");
+      }
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.modal {
-  justify-content: flex-end;
-  transition: 0.5s ease;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
   opacity: 0;
+}
 
-  &.is-active {
-    opacity: 1;
+.box {
+  align-items: center;
+  border: 1px solid $grey-light;
+  border-left-width: 0;
+  border-radius: 3px;
+  bottom: 1em;
+  box-shadow: $shadow;
+  display: flex;
+  left: 50%;
+  padding: 0.8em 1em 0.8em 2em;
+  position: absolute;
+  transform: translateX(-50%);
+
+  .icon {
+    margin-right: 0.5em;
   }
 
-  .box {
-    align-items: center;
-    border: 1px solid $grey-light;
-    border-left-width: 0;
-    border-radius: 3px;
-    display: flex;
-    margin-bottom: 1em;
-    padding: 0.8em 1em 0.8em 2em;
-    position: relative;
-
-    .icon {
-      margin-right: 0.5em;
-    }
-
-    &::before {
-      background-color: $danger;
-      border-right-width: 0;
-      border-bottom-left-radius: 3px;
-      border-top-left-radius: 3px;
-      content: "";
-      height: calc(100% + 2px);
-      left: 0;
-      margin-top: -1.5px;
-      position: absolute;
-      top: 0;
-      width: 1em;
-    }
+  &::before {
+    background-color: $danger;
+    border-right-width: 0;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    content: "";
+    height: calc(100% + 2px);
+    left: 0;
+    margin-top: -1.5px;
+    position: absolute;
+    top: 0;
+    width: 1em;
   }
 }
 </style>

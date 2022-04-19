@@ -37,7 +37,7 @@ export default {
   align-items: center;
   border: 2px solid $black;
   border-radius: 3px;
-  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: $shadow;
   display: flex;
   justify-content: center;
   position: relative;
